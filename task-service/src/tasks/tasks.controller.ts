@@ -19,17 +19,17 @@ export class TasksController {
   }
 
   @MessagePattern('findOneTask')
-  findOne(@Payload() id: number) {
+  findOne(@Payload() id: string) {
     return this.tasksService.findOne(id);
   }
 
   @MessagePattern('updateTask')
   update(@Payload() updateTaskDto: UpdateTaskDto) {
-    return this.tasksService.update(updateTaskDto.id, updateTaskDto);
+    return this.tasksService.update(updateTaskDto.id, updateTaskDto.data);
   }
 
   @MessagePattern('removeTask')
-  remove(@Payload() id: number) {
+  remove(@Payload() id: string) {
     return this.tasksService.remove(id);
   }
 }
