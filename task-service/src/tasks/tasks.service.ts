@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Task, TaskDocument } from './task.schema.js';
 import { CreateTaskDto } from './dto/create-task.dto.js';
+import { UpdateTaskDto } from './dto/update-task.dto.js';
 
 @Injectable()
 export class TasksService {
@@ -32,18 +33,17 @@ export class TasksService {
   }
 
   async update(
-    id: string,
-    data: CreateTaskDto,
+    updateTaskDto: UpdateTaskDto,
   ) {
     const task = await this.taskModel
-      .findByIdAndUpdate(id, data, {
+      .findByIdAndUpdate(updateTaskDto.id, updateTaskDto.data, {
         new: true,
         runValidators: true,
       })
       .exec();
 
     if (!task) {
-      throw new NotFoundException(`Task with ID ${id} not found`);
+      throw new NotFoundException(`Task with ID ${updateTaskDto.id} not found`);
     }
 
     return task;

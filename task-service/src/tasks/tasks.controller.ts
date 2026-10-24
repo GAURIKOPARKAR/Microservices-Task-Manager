@@ -25,7 +25,7 @@ export class TasksController {
 
   @MessagePattern('updateTask')
   update(@Payload() updateTaskDto: UpdateTaskDto) {
-    return this.tasksService.update(updateTaskDto.id, updateTaskDto.data);
+    return this.tasksService.update(updateTaskDto);
   }
 
   @MessagePattern('removeTask')

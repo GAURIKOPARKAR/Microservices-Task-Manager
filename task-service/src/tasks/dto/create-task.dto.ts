@@ -1,19 +1,25 @@
-import { IsString, IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
-import { IsEnum } from 'class-validator';
 
-
-export class CreateTaskDto {
+import {
+    IsIn,
+    IsNotEmpty,
+    IsOptional,
+    IsString,
+    MaxLength,
+  } from 'class-validator';
+  
+  export class CreateTaskDto {
     @IsString()
     @IsNotEmpty()
     @MaxLength(120)
-    title: string;
-    @IsString()
+    title!: string;
+  
     @IsOptional()
+    @IsString()
     @MaxLength(1000)
     description?: string;
-
-    @IsEnum(['pending', 'in-progress', 'completed'])
+  
     @IsOptional()
-    @IsString()
+    @IsIn(['pending', 'in-progress', 'completed'])
     status?: string;
-}
+  }
+  
